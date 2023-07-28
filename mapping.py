@@ -1,6 +1,8 @@
 lower_case = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
-upper_case = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'
+upper_case = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯI'
+mapping_abc = {k:v for k, v in zip(range(1, 35), upper_case)}
 
+'''
 mapping_abc = {}
 
 for k, v in zip(range(33), lower_case):
@@ -20,3 +22,4 @@ for k, v in zip(range(33), upper_case):
 
 
 mapping_abc.update(upper_case_dict)
+'''

@@ -27,12 +27,12 @@ app.add_middleware(
 UPLOAD_DIR = "data/uploaded_files"
 Path(UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
 
-model = YOLO('./data/weights/best.pt')
+model = YOLO('./data/weights/best_2.pt')
 
 
 def mapping(result):
     index = int(torch.argmax(result[0].probs.data.to('cpu')))
-    letter = result[0].names[index]
+    letter = int(result[0].names[index])
     mapping_letter = mp.mapping_abc[letter]
     return mapping_letter
 
