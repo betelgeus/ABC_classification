@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="/public/style.css">
+  <script src="/public/script.js" defer></script>
+</head>
+<body>
+  <div id="container" class="container">
+    <canvas id="canvas"></canvas>
+    <div id="buttons">
+      <button id="undo-button" onclick="Restore()">Undo</button>
+      <button id="clear-button" onclick="Clear()">Clear</button>
+      <button id="save-img">Save As Image</button>
+    </div>
+    <div id="response"></div>
+    <!--
+    TODO: удалить потом если не нужно
+    <label>
+        <input type="color" oninput="stroke_color = this.value" placeholder="Colors"/>
+
+    </label>
+
+    <label>
+      <input type="range" min="1" max="100" oninput="stroke_width = this.value"/>
+    </label>
+     -->
+  </div>
+</body>
+</html>
