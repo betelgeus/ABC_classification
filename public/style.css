@@ -16,3 +16,20 @@
 #buttons {
   margin: 20px;
 }
+
+#response {
+  font-size: 30px;
+}
+
+
+.buttons  {
+  background: #4A98F7;
+  border: 1px solid #4A98F7;
+  outline: none;
+  padding: 11px;
+  font-size: 0.9rem;
+  color: #ffffff;
+  margin: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}

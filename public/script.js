@@ -120,7 +120,7 @@ saveImg.addEventListener("click", () => {
         .then(response => response.json())
         .then(data => {
             // Обработка ответа от сервера
-            model_result.innerHTML = `Filename: ${data.filename}<br>File Path: ${data.file_path}`;
+            model_result.innerHTML = `Это буква: ${data.result}`;
         })
         .catch(error => {
             model_result.innerHTML = error;

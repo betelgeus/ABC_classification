@@ -27,7 +27,7 @@ app.add_middleware(
 UPLOAD_DIR = "data/uploaded_files"
 Path(UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
 
-model = YOLO('../data/weights/best.pt')
+model = YOLO('./data/weights/best.pt')
 
 
 def mapping(result):
@@ -55,5 +55,5 @@ async def upload_image(file: UploadFile = File(...)):
     result = predict(image_path)
 
     # Возвращаем информацию о загруженном файле
-    return {"filename": file.filename, "file_path": image_path}
+    return {'result': result}
 
