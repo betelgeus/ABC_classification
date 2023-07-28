@@ -34,6 +34,9 @@ def mapping(result):
     index = int(torch.argmax(result[0].probs.data.to('cpu')))
     letter = int(result[0].names[index])
     mapping_letter = mp.mapping_abc[letter]
+    probs = result[0].probs.data[index].to('cpu')
+    if probs <= .4:
+        mapping_letter = 'Попробуй еще раз'
     return mapping_letter
 
 
