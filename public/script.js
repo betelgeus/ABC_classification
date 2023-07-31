@@ -13,6 +13,7 @@ const saveImg = document.querySelector("#save-img");
 const taskIntro = document.getElementById("task-intro");
 const letterTask = document.getElementById("letter-task");
 const russianAlphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
+const loader = document.querySelector(".loader");
 let randomLetter;
 
 // Обработчик события "DOMContentLoaded" для отображения случайной буквы при загрузке страницы
@@ -116,6 +117,10 @@ function getRandomRussianLetter() {
 
 
 saveImg.addEventListener("click", () => {
+    taskIntro.style.display = "none";
+    letterTask.style.display = "none";
+    loader.style.display = "block";
+
     // Получаем данные из canvas в формате base64
     let imageData = canvas.toDataURL();
 
@@ -141,18 +146,26 @@ saveImg.addEventListener("click", () => {
             // Обработка ответа от сервера
             if (data.result === true) {
                 randomLetter = getRandomRussianLetter();
-                taskIntro.innerHTML = 'Молодец! Теперь напиши букву'
+                taskIntro.style.display = "block";
+                letterTask.style.display = "block";
+                taskIntro.innerHTML = 'Молодец! Теперь напиши букву';
                 letterTask.innerHTML = `${randomLetter}`;
             } else if (data.result === false) {
+                taskIntro.style.display = "block";
+                letterTask.style.display = "block";
                 taskIntro.innerHTML = 'Попробуй еще раз! Напиши букву'
                 letterTask.innerHTML = `${randomLetter}`;
             } else {
+                taskIntro.style.display = "block";
+                letterTask.style.display = "block";
                 letterTask.innerHTML = "Неизвестный результат. Попробуй еще раз!";
             }
             Clear();
+            loader.style.display = "none";
         })
         .catch(error => {
             taskIntro.innerHTML = error;
             console.error(error);
+            loader.style.display = "none";
     });
 });
