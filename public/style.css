@@ -39,7 +39,7 @@
   height: 40px;
   z-index: 9999;
   animation: spin 2s linear infinite;
-  display: none;  /* Скрываем лоадер по умолчанию */
+  display: none;
 }
 
 @keyframes spin {
