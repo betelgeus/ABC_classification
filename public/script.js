@@ -1,7 +1,7 @@
-let canvas = document.getElementById("canvas");
+const canvas = document.getElementById("canvas");
 canvas.width = 400;
 canvas.height = 400;
-let context = canvas.getContext("2d");
+const context = canvas.getContext("2d");
 context.fillStyle = "white";
 context.fillRect(0, 0, canvas.width, canvas.height);
 let restore_array = [];
@@ -9,16 +9,17 @@ let start_index = -1;
 let stroke_color = 'black';
 let stroke_width = "15";
 let is_drawing = false;
-let saveImg = document.querySelector("#save-img");
-let model_result = document.getElementById("response");
-let russianAlphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя';
-
+const saveImg = document.querySelector("#save-img");
+const taskIntro = document.getElementById("task-intro");
+const letterTask = document.getElementById("letter-task");
+const russianAlphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
+let randomLetter;
 
 // Обработчик события "DOMContentLoaded" для отображения случайной буквы при загрузке страницы
 document.addEventListener("DOMContentLoaded", () => {
-    const randomLetter = getRandomRussianLetter();
-    const randomLetterDiv = document.getElementById("randomLetter");
-    randomLetterDiv.textContent = randomLetter; // Отображаем случайную букву на странице
+    randomLetter = getRandomRussianLetter();
+    taskIntro.textContent = 'Напиши букву'
+    letterTask.textContent = `${randomLetter}`; // Отображаем случайную букву на странице
 });
 
 
@@ -109,51 +110,49 @@ function dataURItoBlob(dataURI) {
 
 // Функция для генерации случайной буквы русского алфавита
 function getRandomRussianLetter() {
-    const randomIndex = Math.floor(Math.random() * russianAlphabet.length);
+    let randomIndex = Math.floor(Math.random() * russianAlphabet.length);
     return russianAlphabet[randomIndex];
 }
 
 
 saveImg.addEventListener("click", () => {
     // Получаем данные из canvas в формате base64
-    const imageData = canvas.toDataURL();
+    let imageData = canvas.toDataURL();
 
     // Создаем объект Blob из данных base64
-    const blob = dataURItoBlob(imageData);
+    let blob = dataURItoBlob(imageData);
 
     // Создаем объект FormData для отправки файла на сервер
-    const formData = new FormData();
-    const Letter = document.getElementById("randomLetter").textContent;
-    const LetterIndex = russianAlphabet.indexOf(Letter);
+    let formData = new FormData();
+    let Letter = randomLetter;
+    let LetterIndex = russianAlphabet.indexOf(Letter);
     // const LetterIndex = '25';
     formData.append("file", blob, `${Date.now()}.png`);
     formData.append("letter_index", LetterIndex);
 
 
     // Отправляем данные на сервер с помощью Fetch API
-    fetch("http://127.0.0.1:8080/upload", {
+    fetch("http://127.0.0.1:8000/upload", {
         method: "POST",
         body: formData,
     })
         .then(response => response.json())
         .then(data => {
             // Обработка ответа от сервера
-            if (data.result === "Все верно, ты молодец!") {
-                model_result.innerHTML = `${data.result}`;
-                const randomLetter = getRandomRussianLetter();
-                const randomLetterDiv = document.getElementById("randomLetter");
-                randomLetterDiv.textContent = randomLetter; // Отображаем случайную букву на странице
-            } else if (data.result === "Попробуй еще раз!") {
-                model_result.innerHTML = `${data.result}, ${data.letter_index}`;
+            if (data.result === true) {
+                randomLetter = getRandomRussianLetter();
+                taskIntro.innerHTML = 'Молодец! Теперь напиши букву'
+                letterTask.innerHTML = `${randomLetter}`;
+            } else if (data.result === false) {
+                taskIntro.innerHTML = 'Попробуй еще раз! Напиши букву'
+                letterTask.innerHTML = `${randomLetter}`;
             } else {
-                model_result.innerHTML = "Неизвестный результат. Попробуй еще раз!";
+                letterTask.innerHTML = "Неизвестный результат. Попробуй еще раз!";
             }
             Clear();
         })
         .catch(error => {
-            model_result.innerHTML = error;
+            letterTask.innerHTML = error;
             console.error(error);
     });
 });
-
-
