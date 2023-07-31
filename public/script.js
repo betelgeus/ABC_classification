@@ -138,10 +138,6 @@ saveImg.addEventListener("click", () => {
     })
         .then(response => response.json())
         .then(data => {
-            const loader = document.querySelector(".loader");
-            if (loader) {
-                loader.remove();
-            }
             // Обработка ответа от сервера
             if (data.result === true) {
                 randomLetter = getRandomRussianLetter();
