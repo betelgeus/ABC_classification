@@ -11,11 +11,16 @@ let stroke_width = "15";
 let is_drawing = false;
 let saveImg = document.querySelector("#save-img");
 let model_result = document.getElementById("response");
+let russianAlphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя';
 
-// TODO: не используется, потом удалить
-function change_width(element) {
-  stroke_width = element.innerHTML
-}
+
+// Обработчик события "DOMContentLoaded" для отображения случайной буквы при загрузке страницы
+document.addEventListener("DOMContentLoaded", () => {
+    const randomLetter = getRandomRussianLetter();
+    const randomLetterDiv = document.getElementById("randomLetter");
+    randomLetterDiv.textContent = randomLetter; // Отображаем случайную букву на странице
+});
+
 
 function start(event) {
   is_drawing = true;
@@ -67,7 +72,7 @@ canvas.addEventListener("mouseup", stop, false);
 canvas.addEventListener("mouseout", stop, false);
 
 
-// TODO: пофиксить багу с несколькими кликами для удаления на десктопе
+// TODO: пофиксить багу с двумя кликами для очистки. Наигрывается на MAC OS с активированной функцией "Касание для имитации нажатия".
 function Restore() {
   if (start_index <= 0) {
     Clear()
@@ -101,6 +106,14 @@ function dataURItoBlob(dataURI) {
     return new Blob([arrayBuffer], { type: mimeString });
 }
 
+
+// Функция для генерации случайной буквы русского алфавита
+function getRandomRussianLetter() {
+    const randomIndex = Math.floor(Math.random() * russianAlphabet.length);
+    return russianAlphabet[randomIndex];
+}
+
+
 saveImg.addEventListener("click", () => {
     // Получаем данные из canvas в формате base64
     const imageData = canvas.toDataURL();
@@ -110,23 +123,37 @@ saveImg.addEventListener("click", () => {
 
     // Создаем объект FormData для отправки файла на сервер
     const formData = new FormData();
+    const Letter = document.getElementById("randomLetter").textContent;
+    const LetterIndex = russianAlphabet.indexOf(Letter);
+    // const LetterIndex = '25';
     formData.append("file", blob, `${Date.now()}.png`);
+    formData.append("letter_index", LetterIndex);
+
 
     // Отправляем данные на сервер с помощью Fetch API
-    fetch("http://127.0.0.1:8000/upload", {
+    fetch("http://127.0.0.1:8080/upload", {
         method: "POST",
-        body: formData
+        body: formData,
     })
         .then(response => response.json())
         .then(data => {
             // Обработка ответа от сервера
-            model_result.innerHTML = `Это буква: ${data.result}`;
+            if (data.result === "Все верно, ты молодец!") {
+                model_result.innerHTML = `${data.result}`;
+                const randomLetter = getRandomRussianLetter();
+                const randomLetterDiv = document.getElementById("randomLetter");
+                randomLetterDiv.textContent = randomLetter; // Отображаем случайную букву на странице
+            } else if (data.result === "Попробуй еще раз!") {
+                model_result.innerHTML = `${data.result}, ${data.letter_index}`;
+            } else {
+                model_result.innerHTML = "Неизвестный результат. Попробуй еще раз!";
+            }
+            Clear();
         })
         .catch(error => {
             model_result.innerHTML = error;
             console.error(error);
     });
 });
-
 
 
