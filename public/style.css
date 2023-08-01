@@ -69,7 +69,7 @@ body {
 #undo-button {
   width: 64px;
   height: 64px;
-  margin: 10px 35px;
+  margin: 10px 30px;
   background-position: center;
   background-color: #4b91da;
   background-size: 64px;
@@ -81,7 +81,7 @@ body {
 #clear-button {
   width: 64px;
   height: 64px;
-  margin: 10px 35px;
+  margin: 10px 30px;
   background-position: center;
   background-color: #4b91da;
   background-size: 64px;
@@ -93,7 +93,7 @@ body {
 #save-img-container {
   width: 64px;
   height: 64px;
-  margin: 10px 35px;
+  margin: 10px 30px;
 }
 
 #save-img {

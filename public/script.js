@@ -52,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// Функции для рисования
 function start(event) {
   is_drawing = true;
   context.beginPath();
