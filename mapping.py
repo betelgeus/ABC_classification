@@ -27,4 +27,4 @@ for k, v in zip(range(33), upper_case):
 mapping_abc.update(upper_case_dict)
 mapping_abc.update(printed_dict)
 
-draw_mapping_abc = {k:v for  k, v in zip(range(33), lower_case)}
+draw_mapping_abc = {k: v for k, v in zip(range(33), lower_case)}

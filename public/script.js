@@ -14,7 +14,7 @@ const saveImg = document.querySelector("#save-img");
 
 const taskIntro = document.getElementById("task-intro");
 const letterTask = document.getElementById("letter-task");
-const russianAlphabet = 'АБВГГЕЕЗЗИИКЛМНОПРСТУУХХЧООБОЬЭАБ';
+const russianAlphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
 let randomLetter;
 let letterIndex;
 
@@ -163,7 +163,7 @@ saveImg.addEventListener("click", () => {
 
 
     // Отправляем данные на сервер с помощью Fetch API
-    fetch("https://932e-88-201-168-105.ngrok-free.app/upload", {
+    fetch("http://127.0.0.1:8000/upload", {
         method: "POST",
         body: formData,
     })
