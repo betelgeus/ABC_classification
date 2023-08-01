@@ -46,15 +46,14 @@ body {
 }
 
 .button-loader {
-  margin: 16px;
-  width: 20px;
-  height: 20px;
+  margin: auto;
+  width: 24px;
+  height: 24px;
   border: 3px solid #ffffff;
   border-top: 3px solid #ff0720;
   border-radius: 50%;
   animation: spin 1s linear infinite;
   display: block;
-
 }
 
 @keyframes spin {
@@ -64,6 +63,7 @@ body {
 
 #buttons  {
   margin: 10px;
+  display: flex;
 }
 
 #undo-button {
@@ -90,10 +90,15 @@ body {
   cursor: pointer;
 }
 
-#save-img {
+#save-img-container {
   width: 64px;
   height: 64px;
   margin: 10px 35px;
+}
+
+#save-img {
+  width: 64px;
+  height: 64px;
   background-position: center;
   background-color: #4b91da;
   background-size: 64px;

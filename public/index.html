@@ -17,11 +17,12 @@
     <div class="loader"></div>
     <canvas id="canvas"></canvas>
     <div id="buttons">
-      <button id="undo-button" class="button" onclick="Restore()"></button>
-      <button id="clear-button" class="button" onclick="Clear()"></button>
-      <button id="save-img" class="button"><div class="button-loader"></div></button>
+      <div><button id="undo-button" class="button" onclick="Restore()"></button></div>
+      <div><button id="clear-button" class="button" onclick="Clear()"></button></div>
+      <div id="save-img-container"><button id="save-img" class="button"><div class="button-loader"></div></button></div>
     </div>
     <!--
+
     TODO: удалить потом если не нужно
     <label>
         <input type="color" oninput="stroke_color = this.value" placeholder="Colors"/>
