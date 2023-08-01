@@ -22,10 +22,8 @@ app.add_middleware(
 )
 
 
-# Директория, в которую будут сохранены загруженные файлы
 UPLOAD_DIR = "data/uploaded_files"
 Path(UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
-
 model = YOLO('./data/weights/printed_and_written.pt')
 
 
@@ -64,4 +62,3 @@ async def upload_image(file: UploadFile = File(...), letter_index: int = Form(..
     result = predict(image_path, letter_index)
 
     return {"result": result}
-

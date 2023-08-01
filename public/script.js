@@ -10,17 +10,43 @@ let stroke_color = 'black';
 let stroke_width = "15";
 let is_drawing = false;
 const saveImg = document.querySelector("#save-img");
+
 const taskIntro = document.getElementById("task-intro");
 const letterTask = document.getElementById("letter-task");
 const russianAlphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
-const loader = document.querySelector(".loader");
 let randomLetter;
+let letterIndex;
+
+const audio1 = document.getElementById("audio1");
+const audio2 = document.getElementById("audio2");
+const audio3 = document.getElementById("audio3");
+const audio4 = document.getElementById("audio4");
+const audioSource1 = "../data/sounds/hi.wav";
+const audioSource3 = "../data/sounds/good.wav";
+const audioSource4 = "../data/sounds/bad.wav";
+let audioSource2;
+
+const loader = document.querySelector(".loader");
+
 
 // Обработчик события "DOMContentLoaded" для отображения случайной буквы при загрузке страницы
 document.addEventListener("DOMContentLoaded", () => {
-    randomLetter = getRandomRussianLetter();
+    const { letter: randomLetter, index: letterIndex } = getRandomRussianLetter();
     taskIntro.textContent = 'Напиши букву'
-    letterTask.textContent = `${randomLetter}`; // Отображаем случайную букву на странице
+    letterTask.textContent = `${randomLetter}`;
+    audioSource2 = `../data/sounds/${letterIndex}.wav`;
+    audio1.src = audioSource1;
+    audio2.src = audioSource2;
+    audio1.play().catch((error) => {
+    console.error("Ошибка воспроизведения первого звука:", error);
+  });
+    // Прослушиваем событие 'ended' на первом аудиоэлементе, чтобы начать воспроизведение второго звука после окончания первого
+    audio1.addEventListener("ended", () => {
+        // Запускаем воспроизведение второго звука
+        audio2.play().catch((error) => {
+        console.error("Ошибка воспроизведения второго звука:", error);
+        });
+    });
 });
 
 
@@ -111,8 +137,9 @@ function dataURItoBlob(dataURI) {
 
 // Функция для генерации случайной буквы русского алфавита
 function getRandomRussianLetter() {
-    let randomIndex = Math.floor(Math.random() * russianAlphabet.length);
-    return russianAlphabet[randomIndex];
+    letterIndex = Math.floor(Math.random() * russianAlphabet.length);
+    randomLetter = russianAlphabet[letterIndex]
+    return {letter: randomLetter, index: letterIndex};
 }
 
 
@@ -129,11 +156,9 @@ saveImg.addEventListener("click", () => {
 
     // Создаем объект FormData для отправки файла на сервер
     let formData = new FormData();
-    let Letter = randomLetter;
-    let LetterIndex = russianAlphabet.indexOf(Letter);
     // const LetterIndex = '25';
     formData.append("file", blob, `${Date.now()}.png`);
-    formData.append("letter_index", LetterIndex);
+    formData.append("letter_index", letterIndex);
 
 
     // Отправляем данные на сервер с помощью Fetch API
@@ -145,16 +170,43 @@ saveImg.addEventListener("click", () => {
         .then(data => {
             // Обработка ответа от сервера
             if (data.result === true) {
-                randomLetter = getRandomRussianLetter();
+                const { letter: randomLetter, index: letterIndex }  = getRandomRussianLetter();
                 taskIntro.style.display = "block";
                 letterTask.style.display = "block";
                 taskIntro.innerHTML = 'Молодец! Теперь напиши букву';
                 letterTask.innerHTML = `${randomLetter}`;
+                audioSource2 = `../data/sounds/${letterIndex}.wav`;
+                audio3.src = audioSource3;
+                audio2.src = audioSource2;
+                audio3.play().catch((error) => {
+                    console.error("Ошибка воспроизведения первого звука:", error);
+                  });
+                    // Прослушиваем событие 'ended' на первом аудиоэлементе, чтобы начать воспроизведение второго звука после окончания первого
+                    audio3.addEventListener("ended", () => {
+                        // Запускаем воспроизведение второго звука
+                        audio2.play().catch((error) => {
+                        console.error("Ошибка воспроизведения второго звука:", error);
+                        });
+                    });
             } else if (data.result === false) {
                 taskIntro.style.display = "block";
                 letterTask.style.display = "block";
                 taskIntro.innerHTML = 'Попробуй еще раз! Напиши букву'
                 letterTask.innerHTML = `${randomLetter}`;
+                audioSource2 = `../data/sounds/${letterIndex}.wav`;
+                audio4.src = audioSource4;
+                audio2.src = audioSource2;
+                audio4.play().catch((error) => {
+                    console.error("Ошибка воспроизведения первого звука:", error);
+                  });
+                    // Прослушиваем событие 'ended' на первом аудиоэлементе, чтобы начать воспроизведение второго звука после окончания первого
+                    audio4.addEventListener("ended", () => {
+                        // Запускаем воспроизведение второго звука
+                        audio2.play().catch((error) => {
+                        console.error("Ошибка воспроизведения второго звука:", error);
+                        });
+                    });
+
             } else {
                 taskIntro.style.display = "block";
                 letterTask.style.display = "block";
