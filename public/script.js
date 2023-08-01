@@ -164,7 +164,10 @@ saveImg.addEventListener("click", () => {
             loader.style.display = "none";
         })
         .catch(error => {
+            taskIntro.style.display = "block";
+            letterTask.style.display = "block";
             taskIntro.innerHTML = error;
+            letterTask.innerHTML = "";
             console.error(error);
             loader.style.display = "none";
     });
