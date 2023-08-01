@@ -162,7 +162,7 @@ saveImg.addEventListener("click", () => {
 
 
     // Отправляем данные на сервер с помощью Fetch API
-    fetch("http://127.0.0.1:8000/upload", {
+    fetch("https://932e-88-201-168-105.ngrok-free.app/upload", {
         method: "POST",
         body: formData,
     })
