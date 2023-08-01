@@ -1,6 +1,6 @@
 const canvas = document.getElementById("canvas");
-canvas.width = 400;
-canvas.height = 400;
+canvas.width = 320;
+canvas.height = 320;
 const context = canvas.getContext("2d");
 const backgroundColor = "white";
 context.fillStyle = backgroundColor;
@@ -103,6 +103,7 @@ canvas.addEventListener("mouseout", stop, false);
 
 
 // TODO: пофиксить багу с двумя кликами для очистки. Наигрывается на MAC OS с активированной функцией "Касание для имитации нажатия".
+// Функция для отмены действия
 function Restore() {
   if (start_index <= 0) {
     Clear()
@@ -116,6 +117,7 @@ function Restore() {
 }
 
 
+// Функция для очистки canvas
 function Clear() {
     context.fillStyle = backgroundColor;
     context.clearRect(0, 0, canvas.width, canvas.height);
@@ -123,6 +125,7 @@ function Clear() {
     restore_array = [];
     start_index = -1;
 }
+
 
 // Функция для преобразования данных base64 в объект Blob
 function dataURItoBlob(dataURI) {
@@ -144,7 +147,8 @@ function getRandomRussianLetter() {
     return {letter: randomLetter, index: letterIndex};
 }
 
-
+// Основная логика приложения, сохраняет картинку,
+// асинхронно отправляет ее на сервер, получает и отображает результат работы модели
 saveImg.addEventListener("click", () => {
     taskIntro.style.display = "none";
     letterTask.style.display = "none";
@@ -165,7 +169,8 @@ saveImg.addEventListener("click", () => {
     formData.append("letter_index", letterIndex);
 
 
-    // Отправляем данные на сервер с помощью Fetch API http://127.0.0.1:8000/upload
+    // Отправляем данные на сервер с помощью Fetch API
+    // http://127.0.0.1:8000/upload https://c56c-88-201-168-105.ngrok-free.app/upload
     fetch("https://c56c-88-201-168-105.ngrok-free.app/upload", {
         method: "POST",
         body: formData,
@@ -186,9 +191,7 @@ saveImg.addEventListener("click", () => {
                 audio3.play().catch((error) => {
                     console.error("Ошибка воспроизведения первого звука:", error);
                   });
-                    // Прослушиваем событие 'ended' на первом аудиоэлементе, чтобы начать воспроизведение второго звука после окончания первого
                     audio3.addEventListener("ended", () => {
-                        // Запускаем воспроизведение второго звука
                         audio2.play().catch((error) => {
                         console.error("Ошибка воспроизведения второго звука:", error);
                         });
@@ -205,9 +208,7 @@ saveImg.addEventListener("click", () => {
                 audio4.play().catch((error) => {
                     console.error("Ошибка воспроизведения первого звука:", error);
                   });
-                    // Прослушиваем событие 'ended' на первом аудиоэлементе, чтобы начать воспроизведение второго звука после окончания первого
                     audio4.addEventListener("ended", () => {
-                        // Запускаем воспроизведение второго звука
                         audio2.play().catch((error) => {
                         console.error("Ошибка воспроизведения второго звука:", error);
                         });

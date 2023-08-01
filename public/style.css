@@ -13,8 +13,8 @@ body {
 #canvas {
   position: relative;
   border: 10px solid #5147c0;
-  width: 400px;
-  height: 400px;
+  width: 320px;
+  height: 320px;
 }
 
 #task-intro {

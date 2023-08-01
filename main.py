@@ -3,7 +3,7 @@ import shutil
 import torch
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
-from ultralytics import YOLO
+# from ultralytics import YOLO
 from pathlib import Path
 import mapping as mp
 
@@ -17,13 +17,13 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["POST"],
+    allow_headers=["multipart/form-data"],
 )
 
 UPLOAD_DIR = "data/uploaded_files"
 Path(UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
-model = YOLO('./data/weights/printed_and_written.pt')
+# model = YOLO('./data/weights/printed_and_written.pt')
 
 
 def results_processing(results, letter_index):
