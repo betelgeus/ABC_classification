@@ -5,6 +5,7 @@
   <title>Title</title>
   <link rel="stylesheet" href="/public/style.css">
   <script src="/public/script.js" defer></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
   <audio id="audio1"></audio>
@@ -18,9 +19,10 @@
     <div class="loader"></div>
     <canvas id="canvas"></canvas>
     <div id="buttons">
-      <button id="undo-button" class="buttons" onclick="Restore()">Отменить</button>
-      <button id="clear-button" class="buttons" onclick="Clear()">Очистить</button>
-      <button id="save-img" class="buttons">Правильно?</button>
+      <button id="undo-button" class="button" onclick="Restore()"></button>
+      <button id="clear-button" class="button" onclick="Clear()"></button>
+      <button id="save-img" class="button" ></button>
+
     </div>
     <!--
     TODO: удалить потом если не нужно

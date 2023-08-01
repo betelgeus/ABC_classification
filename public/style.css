@@ -1,3 +1,7 @@
+body {
+  background-color: #4b91da;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -8,33 +12,29 @@
 
 #canvas {
   position: relative;
-  border: 3px solid black;
+  border: 10px solid #5147c0;
   width: 400px;
   height: 400px;
 }
 
-#buttons {
-  margin: 20px;
-}
-
 #task-intro {
-  height: 20px;
-  font-size: 25px;
-  color: black;
+  height: 40px;
+  font-size: 40px;
+  color: #251f72;
 }
 
 #letter-task {
-  font-family: Arial;
+  font-family: Arial bold;
   margin: 5px 20px 15px 20px;
-  height: 50px;
-  font-size: 50px;
-  color: red;
+  height: 75px;
+  font-size: 75px;
+  color: #d31f21;
 }
 
 .loader {
-  margin: 22px 20px 20px 20px;
+  margin: 67px 20px 20px 20px;
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #3498db;
+  border-top: 4px solid #5047bf;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -48,14 +48,46 @@
   100% { transform: rotate(360deg); }
 }
 
-.buttons  {
-  background: #4A98F7;
-  border: 1px solid #4A98F7;
-  outline: none;
-  padding: 11px;
-  font-size: 0.9rem;
-  color: #ffffff;
-  margin: 5px;
-  border-radius: 4px;
+#buttons  {
+  margin: 15px;
+}
+
+#undo-button {
+  width: 64px;
+  height: 64px;
+  margin: 10px 35px;
+  background-position: center;
+  background-color: #4b91da;
+  background-size: 64px;
+  background-image: url("../data/icons/icons8-undo-64.png");
+  border: none;
   cursor: pointer;
+}
+
+#clear-button {
+  width: 64px;
+  height: 64px;
+  margin: 20px;
+  background-position: center;
+  background-color: #4b91da;
+  background-size: 64px;
+  background-image: url("../data/icons/icons8-trash_bin-100.png");
+  border: none;
+  cursor: pointer;
+}
+
+#save-img {
+  width: 64px;
+  height: 64px;
+  margin: 20px;
+  background-position: center;
+  background-color: #4b91da;
+  background-size: 64px;
+  background-image: url("../data/icons/icons8-ок-100.png");
+  border: none;
+  cursor: pointer;
+}
+
+.button:active {
+  transform: translateY(2px); /* Например, делаем кнопку немного опущенной */
 }

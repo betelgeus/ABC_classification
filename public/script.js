@@ -2,7 +2,8 @@ const canvas = document.getElementById("canvas");
 canvas.width = 400;
 canvas.height = 400;
 const context = canvas.getContext("2d");
-context.fillStyle = "white";
+const backgroundColor = "#71e9d7";
+context.fillStyle = backgroundColor;
 context.fillRect(0, 0, canvas.width, canvas.height);
 let restore_array = [];
 let start_index = -1;
@@ -13,7 +14,7 @@ const saveImg = document.querySelector("#save-img");
 
 const taskIntro = document.getElementById("task-intro");
 const letterTask = document.getElementById("letter-task");
-const russianAlphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ';
+const russianAlphabet = 'АБВГГЕЕЗЗИИКЛМНОПРСТУУХХЧООБОЬЭАБ';
 let randomLetter;
 let letterIndex;
 
@@ -115,7 +116,7 @@ function Restore() {
 
 
 function Clear() {
-    context.fillStyle = "white";
+    context.fillStyle = backgroundColor;
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.fillRect(0, 0, canvas.width, canvas.height);
     restore_array = [];
