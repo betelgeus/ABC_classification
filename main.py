@@ -30,7 +30,6 @@ model = YOLO('./data/weights/printed_and_written.pt')
 def results_processing(results, letter_index):
     predict_index = int(torch.argmax(results[0].probs.data.to('cpu')))
     predict_letter_index = results[0].names[predict_index]
-    # predict_letter_index = '02_01'
     predict_letter = mp.mapping_abc[predict_letter_index]
     drawn_letter = mp.draw_mapping_abc[letter_index]
     if predict_letter.lower() == drawn_letter:
@@ -45,7 +44,6 @@ def results_processing(results, letter_index):
 
 def predict(image_path, letter_index):
     results = model(image_path, device=DEVICE)
-    # results = 25
     result = results_processing(results, letter_index)
     return result
 
