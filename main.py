@@ -11,7 +11,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 app = FastAPI()
 
-origins = ["http://localhost:63342", "https://8789-88-201-168-105.ngrok-free.app"]
+origins = ["http://localhost:63342", "https://9f32-88-201-168-105.ngrok-free.app"]
 
 app.add_middleware(
     CORSMiddleware,
@@ -36,7 +36,7 @@ def results_processing(results, letter_index):
     if predict_letter.lower() == drawn_letter:
         result = True
         probs = results[0].probs.data[predict_index].to('cpu')
-        if probs <= .9:
+        if probs <= .8:
             result = False
     else:
         result = False

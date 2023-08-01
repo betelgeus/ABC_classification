@@ -2,7 +2,7 @@ const canvas = document.getElementById("canvas");
 canvas.width = 400;
 canvas.height = 400;
 const context = canvas.getContext("2d");
-const backgroundColor = "#71e9d7";
+const backgroundColor = "white";
 context.fillStyle = backgroundColor;
 context.fillRect(0, 0, canvas.width, canvas.height);
 let restore_array = [];
@@ -162,8 +162,8 @@ saveImg.addEventListener("click", () => {
     formData.append("letter_index", letterIndex);
 
 
-    // Отправляем данные на сервер с помощью Fetch API
-    fetch("http://127.0.0.1:8000/upload", {
+    // Отправляем данные на сервер с помощью Fetch API http://127.0.0.1:8000/upload
+    fetch("https://c56c-88-201-168-105.ngrok-free.app/upload", {
         method: "POST",
         body: formData,
     })
