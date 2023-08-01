@@ -53,7 +53,7 @@ body {
   border-top: 3px solid #ff0720;
   border-radius: 50%;
   animation: spin 1s linear infinite;
-  display: block;
+  display: none;
 }
 
 @keyframes spin {
