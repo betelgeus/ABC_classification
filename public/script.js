@@ -28,6 +28,7 @@ const audioSource4 = "../data/sounds/bad.wav";
 let audioSource2;
 
 const loader = document.querySelector(".loader");
+const buttonLoader = document.querySelector(".button-loader");
 
 
 // Обработчик события "DOMContentLoaded" для отображения случайной буквы при загрузке страницы
@@ -147,7 +148,9 @@ function getRandomRussianLetter() {
 saveImg.addEventListener("click", () => {
     taskIntro.style.display = "none";
     letterTask.style.display = "none";
+
     loader.style.display = "block";
+    buttonLoader.style.display = "block";
 
     // Получаем данные из canvas в формате base64
     let imageData = canvas.toDataURL();
@@ -174,6 +177,7 @@ saveImg.addEventListener("click", () => {
                 const { letter: randomLetter, index: letterIndex }  = getRandomRussianLetter();
                 taskIntro.style.display = "block";
                 letterTask.style.display = "block";
+                buttonLoader.style.display = "none";
                 taskIntro.innerHTML = 'Молодец! Теперь напиши букву';
                 letterTask.innerHTML = `${randomLetter}`;
                 audioSource2 = `../data/sounds/${letterIndex}.wav`;
@@ -192,6 +196,7 @@ saveImg.addEventListener("click", () => {
             } else if (data.result === false) {
                 taskIntro.style.display = "block";
                 letterTask.style.display = "block";
+                buttonLoader.style.display = "none";
                 taskIntro.innerHTML = 'Попробуй еще раз! Напиши букву'
                 letterTask.innerHTML = `${randomLetter}`;
                 audioSource2 = `../data/sounds/${letterIndex}.wav`;
@@ -211,10 +216,12 @@ saveImg.addEventListener("click", () => {
             } else {
                 taskIntro.style.display = "block";
                 letterTask.style.display = "block";
+                buttonLoader.style.display = "none";
                 letterTask.innerHTML = "Неизвестный результат. Попробуй еще раз!";
             }
             Clear();
             loader.style.display = "none";
+            buttonLoader.style.display = "none";
         })
         .catch(error => {
             taskIntro.style.display = "block";
@@ -223,5 +230,6 @@ saveImg.addEventListener("click", () => {
             letterTask.innerHTML = "";
             console.error(error);
             loader.style.display = "none";
+            buttonLoader.style.display = "none";
     });
 });
