@@ -1,10 +1,10 @@
-import shutil
 import os
+import shutil
 import torch
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
-from pathlib import Path
 from ultralytics import YOLO
+from pathlib import Path
 import mapping as mp
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -21,7 +21,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 UPLOAD_DIR = "data/uploaded_files"
 Path(UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
 model = YOLO('./data/weights/printed_and_written.pt')
@@ -35,7 +34,7 @@ def results_processing(results, letter_index):
     if predict_letter.lower() == drawn_letter:
         result = True
         probs = results[0].probs.data[predict_index].to('cpu')
-        if probs <= .8:
+        if probs <= .95:
             result = False
     else:
         result = False
@@ -58,5 +57,4 @@ async def upload_image(file: UploadFile = File(...), letter_index: int = Form(..
         shutil.copyfileobj(file.file, f)
 
     result = predict(image_path, letter_index)
-
     return {"result": result}
