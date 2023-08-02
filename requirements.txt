@@ -5,3 +5,4 @@ uvicorn == 0.23.1
 python-multipart == 0.0.6
 numpy == 1.25.1
 ultralytics == 8.0.143
+pytest == 7.4.0
