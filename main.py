@@ -3,12 +3,14 @@ import shutil
 import torch
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
-# from ultralytics import YOLO
+from ultralytics import YOLO
 from pathlib import Path
+from dotenv import load_dotenv
+
 import mapping as mp
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
+load_dotenv()
 app = FastAPI()
 
 origins = ["https://df86-88-201-168-105.ngrok-free.app",
@@ -26,7 +28,9 @@ app.add_middleware(
 
 UPLOAD_DIR = "data/uploaded_files"
 Path(UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
-# model = YOLO("./data/weights/printed_and_written.pt")
+MODEL_DIR = os.getenv("MODEL_DIR")
+
+model = YOLO(MODEL_DIR)
 
 
 def results_processing(results, letter_index):
@@ -52,6 +56,7 @@ def predict(image_path, letter_index):
 
 @app.post("/upload/")
 async def upload_image(file: UploadFile = File(...), letter_index: int = Form(...)):
+
     # Создаем путь для сохранения файла
     image_path = os.path.join(UPLOAD_DIR, file.filename)
 
