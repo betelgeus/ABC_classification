@@ -5,12 +5,11 @@ from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from ultralytics import YOLO
 from pathlib import Path
-from dotenv import load_dotenv
 
 import mapping as mp
+from constants import global_config
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-load_dotenv()
 app = FastAPI()
 
 origins = ["https://df86-88-201-168-105.ngrok-free.app",
@@ -28,8 +27,7 @@ app.add_middleware(
 
 UPLOAD_DIR = "data/uploaded_files"
 Path(UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
-MODEL_DIR = os.getenv("MODEL_DIR")
-
+MODEL_DIR = global_config.MODEL_DIR
 model = YOLO(MODEL_DIR)
 
 
