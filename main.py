@@ -11,7 +11,10 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
 app = FastAPI()
 
-origins = ["http://localhost:63342", "https://9f32-88-201-168-105.ngrok-free.app"]
+origins = ["https://df86-88-201-168-105.ngrok-free.app",
+           "http://127.0.0.1:8080",
+           "http://127.0.0.1:63342",
+           "http://localhost:63342"]
 
 app.add_middleware(
     CORSMiddleware,
