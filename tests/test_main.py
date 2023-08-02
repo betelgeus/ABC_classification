@@ -7,16 +7,15 @@ import torch
 from fastapi.testclient import TestClient
 from ultralytics import YOLO
 
-import main as main
+import main
 from constants import global_config
 
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-UPLOAD_DIR = global_config.TEST_DATA_DIR
-UPLOAD_DIR = os.path.abspath(UPLOAD_DIR)
-image_path = os.path.join(UPLOAD_DIR, "1690920920325.png")
+DOWNLOAD_DIR = global_config.TEST_DATA_DIR
+image_path = os.path.join(DOWNLOAD_DIR, "1690920920325.png")
+UPLOAD_DIR = global_config.UPLOAD_DIR
 MODEL_DIR = global_config.TEST_MODEL_DIR
-MODEL_DIR = os.path.abspath(MODEL_DIR)
 model = YOLO(MODEL_DIR)
 
 

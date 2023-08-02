@@ -4,7 +4,6 @@ import torch
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from ultralytics import YOLO
-from pathlib import Path
 
 import mapping as mp
 from constants import global_config
@@ -25,8 +24,7 @@ app.add_middleware(
     allow_headers=["multipart/form-data"],
 )
 
-UPLOAD_DIR = "data/uploaded_files"
-Path(UPLOAD_DIR).mkdir(parents=True, exist_ok=True)
+UPLOAD_DIR = global_config.UPLOAD_DIR
 MODEL_DIR = global_config.MODEL_DIR
 model = YOLO(MODEL_DIR)
 

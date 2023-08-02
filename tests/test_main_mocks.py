@@ -10,8 +10,9 @@ from main import predict  # Импортируем predict функцию, чт�
 from constants import global_config
 
 # Создаем директорию для загрузки файлов
-UPLOAD_DIR = global_config.TEST_DATA_DIR
-image_path = os.path.join(UPLOAD_DIR, "1690920920325.png")
+DOWNLOAD_DIR = global_config.TEST_DATA_DIR
+image_path = os.path.join(DOWNLOAD_DIR, "1690920920325.png")
+UPLOAD_DIR = global_config.UPLOAD_DIR
 
 
 def test_upload_image():
