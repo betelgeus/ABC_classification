@@ -4,6 +4,7 @@ import torch
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from ultralytics import YOLO
+from typing import Dict
 
 import mapping as mp
 from constants import global_config
@@ -29,7 +30,7 @@ MODEL_DIR = global_config.MODEL_DIR
 model = YOLO(MODEL_DIR)
 
 
-def results_processing(results, letter_index):
+def results_processing(results: YOLO, letter_index: int) -> bool:
     predict_index = int(torch.argmax(results[0].probs.data.to('cpu')))
     predict_letter_index = results[0].names[predict_index]
     predict_letter = mp.mapping_abc[predict_letter_index]
@@ -44,14 +45,14 @@ def results_processing(results, letter_index):
     return result
 
 
-def predict(image_path, letter_index):
+def predict(image_path: str, letter_index: int) -> bool:
     results = model(image_path, device=DEVICE)
     result = results_processing(results, letter_index)
     return result
 
 
 @app.post("/upload/")
-async def upload_image(file: UploadFile = File(...), letter_index: int = Form(...)):
+async def upload_image(file: UploadFile = File(...), letter_index: int = Form(...)) -> Dict[str, bool]:
 
     # Создаем путь для сохранения файла
     assert file.filename is not None
