@@ -54,6 +54,7 @@ def predict(image_path, letter_index):
 async def upload_image(file: UploadFile = File(...), letter_index: int = Form(...)):
 
     # Создаем путь для сохранения файла
+    assert file.filename is not None
     image_path = os.path.join(UPLOAD_DIR, file.filename)
 
     # Сохраняем файл на сервере

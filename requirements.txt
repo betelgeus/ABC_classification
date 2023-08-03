@@ -8,4 +8,5 @@ ultralytics == 8.0.143
 pytest == 7.4.0
 httpx == 0.24.1
 jupyter == 1.0.0
+mypy == 1.4.1
 # python-dotenv == 1.0.0
