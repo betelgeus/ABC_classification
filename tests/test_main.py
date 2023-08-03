@@ -39,8 +39,8 @@ def test_upload_image():
     client = TestClient(main.app)
     try:
         # Загружаем тестовый файл и данные формы
-        with open(image_path, "rb") as f:
-            files = {"file": ("1690920920325_1.png", f, "image/png")}
+        with open(image_path, "rb") as file_handle:
+            files = {"file": ("1690920920325_1.png", file_handle, "image/png")}
             data = {"letter_index": "0"}
 
             # Отправляем POST-запрос на сервер
@@ -58,8 +58,8 @@ def test_upload_image():
         os.remove(os.path.join(UPLOAD_DIR, "1690920920325_1.png"))
 
     try:
-        with open(image_path, "rb") as f:
-            files = {"file": ("1690920920325_1.png", f, "image/png")}
+        with open(image_path, "rb") as file_handle:
+            files = {"file": ("1690920920325_1.png", file_handle, "image/png")}
             data = {"letter_index": "14"}
 
             response = client.post("/upload/", files=files, data=data)
