@@ -19,8 +19,8 @@ def test_upload_image():
     client = TestClient(app)
     try:
         # Загружаем тестовый файл и данные формы
-        with open(image_path, "rb") as f:
-            files = {"file": ("1690920920325_2.png", f, "image/png")}
+        with open(image_path, "rb") as file_handle:
+            files = {"file": ("1690920920325_2.png", file_handle, "image/png")}
             data = {"letter_index": "1"}
 
             # Замокаем функцию predict и вернем фиксированный результат
