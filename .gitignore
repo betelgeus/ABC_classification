@@ -1,6 +1,8 @@
 # Project files
 zip_letters
 data/letters
+tests/
+
 
 # IntelliJ project files
 .idea
@@ -163,3 +165,4 @@ dmypy.json
 cython_debug/
 
 
+/tests/
