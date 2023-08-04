@@ -1,2 +1,5 @@
 .idea
-Dockerfile
+.mypy_cache
+.pytest_cache
+venv
+zip_letters

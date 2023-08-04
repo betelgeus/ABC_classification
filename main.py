@@ -9,6 +9,8 @@ import shutil
 from typing import Dict
 import torch
 from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from ultralytics import YOLO
 
@@ -17,11 +19,10 @@ from constants import global_config
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 app = FastAPI()
+app.mount("/public", StaticFiles(directory="public", html=True), name="static")
 
-origins = ["https://df86-88-201-168-105.ngrok-free.app",
-           "http://127.0.0.1:8080",
-           "http://127.0.0.1:63342",
-           "http://localhost:63342"]
+# Определяем хосты, который разрешены запросы.
+origins = [""]
 
 app.add_middleware(
     CORSMiddleware,
@@ -31,8 +32,8 @@ app.add_middleware(
     allow_headers=["multipart/form-data"],
 )
 
-UPLOAD_DIR = global_config.UPLOAD_DIR
-MODEL_DIR = global_config.MODEL_DIR
+UPLOAD_DIR = os.path.abspath(global_config.UPLOAD_DIR)
+MODEL_DIR = os.path.abspath(global_config.MODEL_DIR)
 model = YOLO(MODEL_DIR)
 
 
@@ -41,9 +42,9 @@ def results_processing(results: YOLO, letter_index: int) -> bool:
         Функция для обработки результатов работы модели:
         Находит букву с максимальной вероятностью,
         сравнивает ее с нарисованной буквой.
-        :param results: объект YOLO;
-        :param letter_index: индекс нарисованной буквы;
-        :return: буквы совпали: True, нет: False;
+        :param results: Объект YOLO;
+        :param letter_index: Индекс нарисованной буквы;
+        :return: Буквы совпали: True, нет: False;
     """
     predict_index = int(torch.argmax(results[0].probs.data.to('cpu')))
     predict_letter_index = results[0].names[predict_index]
@@ -63,24 +64,32 @@ def predict(image_path: str, letter_index: int) -> bool:
     """
         Функция получает предсказание модели,
         передает в функцию results_processing для обработки.
-        :param image_path: путь к изображению;
-        :param letter_index: индекс нарисованной буквы;
-        :return: буквы совпали: True, нет: False;
+        :param image_path: Путь к изображению;
+        :param letter_index: Индекс нарисованной буквы;
+        :return: Буквы совпали: True, нет: False;
     """
     results = model(image_path, device=DEVICE)
     result = results_processing(results, letter_index)
     return result
 
 
-@app.post("/upload/")
+@app.get("/public")
+async def root() -> FileResponse:
+    """
+        Функция отдает на фронт статичную html страницу.
+    """
+    return FileResponse('public/index.html', media_type="text/html")
+
+
+@app.post("/upload")
 async def upload_image(file: UploadFile = File(...),
                        letter_index: int = Form(...)) -> Dict[str, bool]:
     """
         Функция получает изображение и индекс буквы с фронта,
         сохраняет изображение, передает его модели.
-        :param file: изображение с нарисованной буквой;
-        :param letter_index: индекс нарисованной буквы;
-        :return: буквы совпали: True, нет: False;
+        :param file: Изображение с нарисованной буквой;
+        :param letter_index: Индекс нарисованной буквы;
+        :return: Буквы совпали: True, нет: False;
     """
 
     # Создаем путь для сохранения файла

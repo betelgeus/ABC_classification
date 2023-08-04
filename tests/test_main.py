@@ -10,12 +10,14 @@ from ultralytics import YOLO
 import main
 from constants import global_config
 
-
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-DOWNLOAD_DIR = global_config.TEST_DATA_DIR
+
+DOWNLOAD_DIR = os.path.abspath(global_config.TEST_DOWNLOAD_DIR)
 image_path = os.path.join(DOWNLOAD_DIR, "1690920920325.png")
-UPLOAD_DIR = global_config.UPLOAD_DIR
-MODEL_DIR = global_config.TEST_MODEL_DIR
+
+UPLOAD_DIR = os.path.abspath(global_config.UPLOAD_DIR)
+
+MODEL_DIR = os.path.abspath(global_config.MODEL_DIR)
 model = YOLO(MODEL_DIR)
 
 
@@ -34,7 +36,16 @@ def test_predict():
     assert main.predict(image_path, letter_index) == True
 
 
-# Функция проверяет полный цикл работы main
+def test_root():
+    client = TestClient(main.app)
+    response = client.get("/public")
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert response.text.startswith("<!DOCTYPE html>")
+    assert "Учимся рисовать буквы" in response.text
+
+
+# Функция проверяет полный цикл получения картинки и возвращения ответа
 def test_upload_image():
     client = TestClient(main.app)
     try:

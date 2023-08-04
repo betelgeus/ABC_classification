@@ -22,9 +22,9 @@ const audio1 = document.getElementById("audio1");
 const audio2 = document.getElementById("audio2");
 const audio3 = document.getElementById("audio3");
 const audio4 = document.getElementById("audio4");
-const audioSource1 = "../data/sounds/hi.wav";
-const audioSource3 = "../data/sounds/good.wav";
-const audioSource4 = "../data/sounds/bad.wav";
+const audioSource1 = "/public/sounds/hi.wav";
+const audioSource3 = "/public/sounds/good.wav";
+const audioSource4 = "/public/sounds/bad.wav";
 let audioSource2;
 
 const loader = document.querySelector(".loader");
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const { letter: randomLetter, index: letterIndex } = getRandomRussianLetter();
     taskIntro.textContent = 'Напиши букву'
     letterTask.textContent = `${randomLetter}`;
-    audioSource2 = `../data/sounds/${letterIndex}.wav`;
+    audioSource2 = `/public/sounds/${letterIndex}.wav`;
     audio1.src = audioSource1;
     audio2.src = audioSource2;
     audio1.play().catch((error) => {
@@ -171,8 +171,8 @@ saveImg.addEventListener("click", () => {
 
 
     // Отправляем данные на сервер с помощью Fetch API
-    // http://127.0.0.1:8000/upload https://c56c-88-201-168-105.ngrok-free.app/upload
-    fetch("http://127.0.0.1:8000/upload", {
+    // http://127.0.0.1:8000/upload
+    fetch("/upload", {
         method: "POST",
         body: formData,
     })
@@ -186,7 +186,7 @@ saveImg.addEventListener("click", () => {
                 buttonLoader.style.display = "none";
                 taskIntro.innerHTML = 'Молодец! Теперь напиши букву';
                 letterTask.innerHTML = `${randomLetter}`;
-                audioSource2 = `../data/sounds/${letterIndex}.wav`;
+                audioSource2 = `/public/sounds/${letterIndex}.wav`;
                 audio3.src = audioSource3;
                 audio2.src = audioSource2;
                 audio3.play().catch((error) => {
@@ -203,7 +203,7 @@ saveImg.addEventListener("click", () => {
                 buttonLoader.style.display = "none";
                 taskIntro.innerHTML = 'Попробуй еще раз! Напиши букву'
                 letterTask.innerHTML = `${randomLetter}`;
-                audioSource2 = `../data/sounds/${letterIndex}.wav`;
+                audioSource2 = `/public/sounds/${letterIndex}.wav`;
                 audio4.src = audioSource4;
                 audio2.src = audioSource2;
                 audio4.play().catch((error) => {
