@@ -79,8 +79,8 @@ class GlobalConfig:
         self.UPLOAD_DIR = "./data/uploaded_files/"
 
         self.TEST_DOWNLOAD_DIR = "./tests/data/uploaded_files/"
-        self.TEST_DOWNLOAD_DIR_3 = "../tests/data/uploaded_files/"
-        self.TEST_UPLOAD_DIR = "../data/uploaded_files/"
+        self.TEST_DOWNLOAD_DIR_3 = "./tests/data/uploaded_files/"
+        self.TEST_UPLOAD_DIR = "./data/uploaded_files/"
 
 
 
