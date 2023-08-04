@@ -9,6 +9,8 @@ import shutil
 from typing import Dict
 import torch
 from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from ultralytics import YOLO
 
@@ -17,11 +19,10 @@ from constants import global_config
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 app = FastAPI()
+app.mount("/public", StaticFiles(directory="public", html=True), name="static")
 
-origins = ["https://df86-88-201-168-105.ngrok-free.app",
-           "http://127.0.0.1:8080",
-           "http://127.0.0.1:63342",
-           "http://localhost:63342"]
+
+origins = [""]
 
 app.add_middleware(
     CORSMiddleware,
@@ -72,7 +73,12 @@ def predict(image_path: str, letter_index: int) -> bool:
     return result
 
 
-@app.post("/upload/")
+@app.get("/public")
+async def root():
+    return FileResponse('public/index.html', media_type="text/html")
+
+
+@app.post("/upload")
 async def upload_image(file: UploadFile = File(...),
                        letter_index: int = Form(...)) -> Dict[str, bool]:
     """
