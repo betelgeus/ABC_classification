@@ -33,11 +33,11 @@ app.add_middleware(
 
 UPLOAD_DIR = os.path.abspath(global_config.UPLOAD_DIR)
 print("++++++++++")
-print("UPLOAD_DIR", UPLOAD_DIR)
+print("MAIN UPLOAD_DIR", UPLOAD_DIR)
 print("++++++++++")
 MODEL_DIR = os.path.abspath(global_config.MODEL_DIR)
 print("++++++++++")
-print("MODEL_DIR", MODEL_DIR)
+print("MAIN MODEL_DIR", MODEL_DIR)
 print("++++++++++")
 model = YOLO(MODEL_DIR)
 
