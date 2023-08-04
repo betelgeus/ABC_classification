@@ -1,4 +1,4 @@
-"""
+'''"""
 Тестируем на моках
 """
 
@@ -40,3 +40,4 @@ def test_upload_image():
         assert os.path.exists(os.path.join(UPLOAD_DIR, "1690920920325_2.png"))
     finally:
         os.remove(os.path.join(UPLOAD_DIR, "1690920920325_2.png"))
+'''

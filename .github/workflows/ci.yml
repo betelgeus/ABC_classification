@@ -1,9 +1,6 @@
 name: Dev CI
 
-on:
-  push:
-    branches:
-      - dev
+on: [push]
 
 jobs:
   run_tests:
