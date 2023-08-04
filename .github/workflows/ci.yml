@@ -1,9 +1,12 @@
 name: Dev CI
 
-on: [push]
+on:
+  push:
+    branches:
+      - dev
 
 jobs:
-  build:
+  run_tests:
     runs-on: ubuntu-latest
 
     environment: abc_classification_dev
