@@ -55,15 +55,22 @@ class GlobalConfig:
                     FAILED tests/test_main.py::test_predict - FileNotFoundError: /home/runner/work/ABC_classification/data/uploaded_files/1690920920325.png
                     does not exist
                     FAILED tests/test_main.py::test_upload_image - FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/ABC_classification/ABC_classification/data/uploaded_files/1690920920325_1.png'
-
-
-
-
+                DEV CI #28
+                    self.MODEL_DIR = "./data/weights/printed_and_written.pt"
+                    self.UPLOAD_DIR = "./data/uploaded_files/"
+                    self.TEST_MODEL_DIR = "../data/weights/printed_and_written.pt"
+                    self.TEST_DOWNLOAD_DIR = "./tests/data/uploaded_files/"
+                    self.TEST_UPLOAD_DIR = "../data/uploaded_files/"
+                    DOWNLOAD_DIR = os.path.abspath(global_config.TEST_DOWNLOAD_DIR)
+                    UPLOAD_DIR = os.path.abspath(global_config.UPLOAD_DIR)
+                    MODEL_DIR = os.path.abspath(global_config.MODEL_DIR)
+                    FAILED tests/test_main.py::test_upload_image - FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/ABC_classification/ABC_classification/data/uploaded_files/1690920920325_1.png'
+                    1 failed, 2 passed in 11.86s
 
         """
         self.MODEL_DIR = "./data/weights/printed_and_written.pt"
         self.UPLOAD_DIR = "./data/uploaded_files/"
-        self.TEST_MODEL_DIR = "../data/weights/printed_and_written.pt"
+
         self.TEST_DOWNLOAD_DIR = "./tests/data/uploaded_files/"
         self.TEST_UPLOAD_DIR = "../data/uploaded_files/"
 
