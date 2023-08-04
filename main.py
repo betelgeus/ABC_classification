@@ -31,8 +31,14 @@ app.add_middleware(
     allow_headers=["multipart/form-data"],
 )
 
-UPLOAD_DIR = global_config.UPLOAD_DIR
-MODEL_DIR = global_config.MODEL_DIR
+UPLOAD_DIR = os.path.abspath(global_config.UPLOAD_DIR)
+print("++++++++++")
+print("UPLOAD_DIR", UPLOAD_DIR)
+print("++++++++++")
+MODEL_DIR = os.path.abspath(global_config.MODEL_DIR)
+print("++++++++++")
+print("MODEL_DIR", MODEL_DIR)
+print("++++++++++")
 model = YOLO(MODEL_DIR)
 
 
