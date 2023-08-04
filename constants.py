@@ -66,12 +66,20 @@ class GlobalConfig:
                     MODEL_DIR = os.path.abspath(global_config.MODEL_DIR)
                     FAILED tests/test_main.py::test_upload_image - FileNotFoundError: [Errno 2] No such file or directory: '/home/runner/work/ABC_classification/ABC_classification/data/uploaded_files/1690920920325_1.png'
                     1 failed, 2 passed in 11.86s
+                DEV CI #29
+                    self.MODEL_DIR = "./data/weights/printed_and_written.pt"
+                    self.UPLOAD_DIR = "./data/uploaded_files/"
+                    self.TEST_DOWNLOAD_DIR = "./tests/data/uploaded_files/"
+                    self.TEST_UPLOAD_DIR = "../data/uploaded_files/"
+                    UPLOAD_DIR = os.path.abspath(global_config.TEST_UPLOAD_DIR)
+
 
         """
         self.MODEL_DIR = "./data/weights/printed_and_written.pt"
         self.UPLOAD_DIR = "./data/uploaded_files/"
 
         self.TEST_DOWNLOAD_DIR = "./tests/data/uploaded_files/"
+        self.TEST_DOWNLOAD_DIR_3 = "../tests/data/uploaded_files/"
         self.TEST_UPLOAD_DIR = "../data/uploaded_files/"
 
 
