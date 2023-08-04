@@ -12,9 +12,18 @@ from constants import global_config
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 DOWNLOAD_DIR = os.path.abspath(global_config.TEST_DATA_DIR)
+print("++++++++++")
+print("TEST DOWNLOAD_DIR", DOWNLOAD_DIR)
+print("++++++++++")
 image_path = os.path.join(DOWNLOAD_DIR, "1690920920325.png")
-UPLOAD_DIR = os.path.abspath(global_config.TEST_UPLOAD_DIR)
-MODEL_DIR = os.path.abspath(global_config.TEST_MODEL_DIR)
+UPLOAD_DIR = os.path.abspath(global_config.UPLOAD_DIR)
+print("++++++++++")
+print("TEST UPLOAD_DIR", UPLOAD_DIR)
+print("++++++++++")
+MODEL_DIR = os.path.abspath(global_config.MODEL_DIR)
+print("++++++++++")
+print("TEST_MODEL_DIR", MODEL_DIR)
+print("++++++++++")
 model = YOLO(MODEL_DIR)
 
 

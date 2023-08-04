@@ -26,11 +26,23 @@ class GlobalConfig:
                     проходит два теста, падает на последнем
                     FileNotFoundError: [Errno 2]
                     No such file or directory: '/home/runner/work/ABC_classification/data/uploaded_files/1690920920325_1.png'
-                путь TEST_UPLOAD_DIR ../, остальные ./
+                DEV CI #24 путь TEST_UPLOAD_DIR ../, остальные ./
                     проходит два теста, падает на последнем
                     FileNotFoundError: [Errno 2]
                      No such file or directory: '/home/runner/work/ABC_classification/ABC_classification/data/uploaded_files/1690920920325_1.png'
-                 путь TEST_UPLOAD_DIR, TEST_DATA_DIR ../, остальные ./
+                DEV CI #25 путь TEST_UPLOAD_DIR, TEST_DATA_DIR ../, остальные ./
+                    падают все тесты
+                DEV CI #26
+                            self.MODEL_DIR = "./data/weights/printed_and_written.pt"
+                            self.UPLOAD_DIR = "./data/uploaded_files/"
+                            self.TEST_MODEL_DIR = "../data/weights/printed_and_written.pt"
+                            self.TEST_DATA_DIR = "../data/uploaded_files/"
+                            self.TEST_UPLOAD_DIR = "../data/uploaded_files/"
+                    падают все тесты
+                    UPLOAD_DIR /home/runner/work/ABC_classification/ABC_classification/data/uploaded_files
+                    MODEL_DIR /home/runner/work/ABC_classification/ABC_classification/data/weights/printed_and_written.pt
+                DEV CI #27
+
 
 
         """
