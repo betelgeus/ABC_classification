@@ -6,7 +6,7 @@ disable = E0401
 [FORMAT]
 
 # Игнорировать проверку стиля именования для конкретных имен
-good-names=ABC_detection, MODEL_DIR, UPLOAD_DIR, TEST_MODEL_DIR, TEST_DATA_DIR
+good-names=ABC_detection, ABC_classification, MODEL_DIR, UPLOAD_DIR, TEST_DOWNLOAD_DIR
 
 [MESSAGES CONTROL]
 

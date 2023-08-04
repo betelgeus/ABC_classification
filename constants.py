@@ -1,7 +1,6 @@
 """
    Модуль содержит глобальные переменные
 """
-import os
 
 
 class GlobalConfig:
