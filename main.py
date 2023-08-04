@@ -8,6 +8,7 @@ import os
 import shutil
 from typing import Dict
 import torch
+import uvicorn
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -102,3 +103,6 @@ async def upload_image(file: UploadFile = File(...),
 
     result = predict(image_path, letter_index)
     return {"result": result}
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
