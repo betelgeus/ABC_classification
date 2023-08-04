@@ -22,13 +22,19 @@ class GlobalConfig:
                     падает на загрузке модели, хотя вроде путь правильный
                     No such file or directory:
                     '/home/runner/work/ABC_classification/data/weights/printed_and_written.pt
-                пути моделей ./, остальные ../
+                пути UPLOAD_DIR ../, остальные ./
+                    проходит два теста, падает на последнем
+                    FileNotFoundError: [Errno 2]
+                    No such file or directory: '/home/runner/work/ABC_classification/data/uploaded_files/1690920920325_1.png'
+                все пути ./
 
         """
         self.MODEL_DIR = "./data/weights/printed_and_written.pt"
-        self.UPLOAD_DIR = "../data/uploaded_files/"
+        self.UPLOAD_DIR = "./data/uploaded_files/"
         self.TEST_MODEL_DIR = "./tests/data/weights/printed_and_written.pt"
         self.TEST_DATA_DIR = "./tests/data/uploaded_files/"
+        self.TEST_UPLOAD_DIR = "../data/uploaded_files/"
+
 
 
 global_config = GlobalConfig()
