@@ -7,7 +7,7 @@
 import os
 import shutil
 from typing import Dict
-import torch
+# import torch
 import uvicorn
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.staticfiles import StaticFiles
