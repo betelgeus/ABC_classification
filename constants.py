@@ -22,7 +22,7 @@ class GlobalConfig:
 
         """
         self.MODEL_DIR = "./data/weights/printed_and_written.pt"
-        self.UPLOAD_DIR = "./data/uploaded_files/"
+        self.UPLOAD_DIR = "../data/uploaded_files/"
 
         self.TEST_DOWNLOAD_DIR = "./data/test_data/"
 

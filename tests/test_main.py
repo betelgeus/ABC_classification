@@ -55,9 +55,9 @@ def test_upload_image():
         assert response.json() == {"result": False}
 
         # Проверяем, что файл успешно сохранен
-        assert os.path.exists(os.path.join("../data/uploaded_files/", "1690920920325_1.png"))
+        assert os.path.exists(os.path.join(UPLOAD_DIR, "1690920920325_1.png"))
     finally:
-        os.remove(os.path.join("../data/uploaded_files/", "1690920920325_1.png"))
+        os.remove(os.path.join(UPLOAD_DIR, "1690920920325_1.png"))
 
     try:
         with open(image_path, "rb") as file_handle:
@@ -68,6 +68,6 @@ def test_upload_image():
 
         assert response.status_code == 200
         assert response.json() == {"result": True}
-        assert os.path.exists(os.path.join("../data/uploaded_files/", "1690920920325_1.png"))
+        assert os.path.exists(os.path.join(UPLOAD_DIR, "1690920920325_1.png"))
     finally:
-        os.remove(os.path.join("../data/uploaded_files/", "1690920920325_1.png"))
+        os.remove(os.path.join(UPLOAD_DIR, "1690920920325_1.png"))
