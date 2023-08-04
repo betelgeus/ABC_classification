@@ -12,6 +12,7 @@ import uvicorn
 from fastapi import FastAPI, UploadFile, File, Form
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
+from fastapi.middleware.cors import CORSMiddleware
 # from ultralytics import YOLO
 
 import mapping as mp
@@ -21,6 +22,16 @@ from constants import global_config
 app = FastAPI()
 app.mount("/public", StaticFiles(directory="public", html=True), name="static")
 
+# Определяем хосты, который разрешены запросы.
+origins = [""]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["POST"],
+    allow_headers=["multipart/form-data"],
+)
 
 
 UPLOAD_DIR = os.path.abspath(global_config.UPLOAD_DIR)
