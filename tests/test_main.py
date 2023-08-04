@@ -10,7 +10,6 @@ from ultralytics import YOLO
 import main
 from constants import global_config
 
-
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 DOWNLOAD_DIR = global_config.TEST_DATA_DIR
 image_path = os.path.join(DOWNLOAD_DIR, "1690920920325.png")
