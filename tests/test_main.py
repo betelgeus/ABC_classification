@@ -11,7 +11,7 @@ import main
 from constants import global_config
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-DOWNLOAD_DIR = os.path.abspath(global_config.TEST_DATA_DIR)
+DOWNLOAD_DIR = os.path.abspath(global_config.TEST_DOWNLOAD_DIR)
 print("++++++++++")
 print("TEST DOWNLOAD_DIR", DOWNLOAD_DIR)
 print("++++++++++")
