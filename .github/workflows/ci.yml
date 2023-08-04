@@ -3,7 +3,7 @@ name: Dev CI
 on: [push]
 
 jobs:
-  run_tests:
+  build:
     runs-on: ubuntu-latest
 
     environment: abc_classification_dev
@@ -36,14 +36,6 @@ jobs:
         run: |
           pylint . *py
 
-      - name: Auto merge on success
-        if: ${{ success() }} # Этот шаг выполнится только при успешном завершении предыдущих шагов
-        run: |
-          # Ваш код для автоматического принятия изменений, например:
-          git config user.name "betelgeus"
-          git config user.email "shehovmitya@gmail.com"
-          git pull origin $DEV # Автоматически сделать merge текущей ветки (PR) с базовой веткой (например, master)
-          git push origin $DEV # Отправить изменения на GitHub
           
 
           
