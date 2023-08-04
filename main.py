@@ -21,7 +21,7 @@ DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 app = FastAPI()
 app.mount("/public", StaticFiles(directory="public", html=True), name="static")
 
-
+# Определяем хосты, который разрешены запросы.
 origins = [""]
 
 app.add_middleware(
@@ -42,9 +42,9 @@ def results_processing(results: YOLO, letter_index: int) -> bool:
         Функция для обработки результатов работы модели:
         Находит букву с максимальной вероятностью,
         сравнивает ее с нарисованной буквой.
-        :param results: объект YOLO;
-        :param letter_index: индекс нарисованной буквы;
-        :return: буквы совпали: True, нет: False;
+        :param results: Объект YOLO;
+        :param letter_index: Индекс нарисованной буквы;
+        :return: Буквы совпали: True, нет: False;
     """
     predict_index = int(torch.argmax(results[0].probs.data.to('cpu')))
     predict_letter_index = results[0].names[predict_index]
@@ -64,9 +64,9 @@ def predict(image_path: str, letter_index: int) -> bool:
     """
         Функция получает предсказание модели,
         передает в функцию results_processing для обработки.
-        :param image_path: путь к изображению;
-        :param letter_index: индекс нарисованной буквы;
-        :return: буквы совпали: True, нет: False;
+        :param image_path: Путь к изображению;
+        :param letter_index: Индекс нарисованной буквы;
+        :return: Буквы совпали: True, нет: False;
     """
     results = model(image_path, device=DEVICE)
     result = results_processing(results, letter_index)
@@ -74,7 +74,10 @@ def predict(image_path: str, letter_index: int) -> bool:
 
 
 @app.get("/public")
-async def root():
+async def root() -> FileResponse:
+    """
+        Функция отдает на фронт статичную html страницу.
+    """
     return FileResponse('public/index.html', media_type="text/html")
 
 
@@ -84,9 +87,9 @@ async def upload_image(file: UploadFile = File(...),
     """
         Функция получает изображение и индекс буквы с фронта,
         сохраняет изображение, передает его модели.
-        :param file: изображение с нарисованной буквой;
-        :param letter_index: индекс нарисованной буквы;
-        :return: буквы совпали: True, нет: False;
+        :param file: Изображение с нарисованной буквой;
+        :param letter_index: Индекс нарисованной буквы;
+        :return: Буквы совпали: True, нет: False;
     """
 
     # Создаем путь для сохранения файла

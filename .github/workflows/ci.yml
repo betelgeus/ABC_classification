@@ -26,7 +26,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest tests/test_main.py::test_results_processing tests/test_main.py::test_predict
+          pytest tests/test_main.py::test_results_processing tests/test_main.py::test_predict tests/test_main.py::test_root
 
       - name: Run mypy
         run: |

@@ -36,7 +36,16 @@ def test_predict():
     assert main.predict(image_path, letter_index) == True
 
 
-# Функция проверяет полный цикл работы main
+def test_root():
+    client = TestClient(main.app)
+    response = client.get("/public")
+    assert response.status_code == 200
+    assert response.headers["content-type"] == "text/html; charset=utf-8"
+    assert response.text.startswith("<!DOCTYPE html>")
+    assert "Учимся рисовать буквы" in response.text
+
+
+# Функция проверяет полный цикл получения картинки и возвращения ответа
 def test_upload_image():
     client = TestClient(main.app)
     try:
