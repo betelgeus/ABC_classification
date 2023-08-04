@@ -13,10 +13,11 @@ class GlobalConfig:
         TEST_DATA_DIR: папка с изображениями для тестов
     """
     def __init__(self) -> None:
+        """локально все  пути ./"""
         self.MODEL_DIR = "../data/weights/printed_and_written.pt"
         self.UPLOAD_DIR = "../data/uploaded_files/"
         self.TEST_MODEL_DIR = "../tests/data/weights/printed_and_written.pt"
-        self.TEST_DATA_DIR = "../tests/data/uploaded_files/"
+        self.TEST_DATA_DIR = "./tests/data/uploaded_files/"
 
 
 global_config = GlobalConfig()
