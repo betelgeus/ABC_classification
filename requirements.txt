@@ -1,13 +1,13 @@
-torch == 2.0.1
+# torch == 2.0.1
 fastapi == 0.100.1
-pydantic == 2.1.1
+# pydantic == 2.1.1
 uvicorn == 0.23.1
 python-multipart == 0.0.6
 numpy == 1.25.1
 ultralytics == 8.0.143
-pytest == 7.4.0
-httpx == 0.24.1
-jupyter == 1.0.0
-mypy == 1.4.1
-pylint == 2.17.5
+# pytest == 7.4.0
+# httpx == 0.24.1
+# jupyter == 1.0.0
+# mypy == 1.4.1
+# pylint == 2.17.5
 # python-dotenv == 1.0.0
