@@ -1,0 +1,20 @@
+[MASTER]
+
+# Игнорируем ошибку импортов
+disable = E0401
+
+[FORMAT]
+
+# Игнорировать проверку стиля именования для конкретных имен
+good-names=ABC_detection, ABC_classification, MODEL_DIR, UPLOAD_DIR, TEST_DOWNLOAD_DIR
+
+[MESSAGES CONTROL]
+
+# Игнорировать ошибку "Too few public methods"
+disable=too-few-public-methods
+
+[TYPECHECK]
+
+# Список элементов, которые устанавливаются динамически и не определены системой вывода Pylint,
+# и поэтому при доступе к ним не должны вызывать ошибку E1101.
+generated-members=torch.*
